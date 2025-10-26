@@ -1,10 +1,9 @@
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -36,7 +35,7 @@ public class SmartDev {
         WebElement webElement6 = new WebDriverWait( webDriver, Duration.ofSeconds(15)).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='skeleton_content']/div/cdp-view/actions/div/div/div[2]/div/form/div/input")));
         webElement6.sendKeys("Создать проект Решения о проведении КНМ");
         //нажимаем кнопку найти
-        new WebDriverWait(webDriver,Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(By.xpath(".//button[contains(@class,'btn-primary') and text()='Найти']"))).click();
+        new WebDriverWait(webDriver,Duration.ofSeconds(15)).until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@class, 'btn-primary') and normalize-space()='Найти']"))).click();
         WebElement webElement7 =   new WebDriverWait(webDriver , Duration.ofSeconds(15)).until(ExpectedConditions.elementToBeClickable(By.xpath(".//span[text()=' Создать проект Решения о проведении КНМ ']")));
         webElement7.click();
         // webDriver.findElement (By.xpath("*[@id='skeleton_content']/div/cdp-view/actions/div/div/div[2]/div/form/div/div/button")).click();
@@ -74,12 +73,81 @@ public class SmartDev {
         WebElement webElement10 = webDriver.findElement(By.xpath(".//span[@class='ng-option-label ng-star-inserted' and text()='Выездная']"));
         ((JavascriptExecutor)webDriver).executeScript("arguments[0].scrollIntoView();",webElement10);
         webElement10.click();
-//добавляем Ответственный за осуществление надзора (руководитель группы)
-        WebElement webElement11 = new WebDriverWait(webDriver , Duration.ofSeconds(10))
-                .until(ExpectedConditions.elementToBeClickable(By.xpath("*[@id='skeleton_content']/div/cdp-view/app-root/app-decision-create/div/div/div[2]/form/authorized-persons-to-conduct-knm/div/div[1]/div/ng-select/div/div/div[2]/input")));
-        webElement11.click();
-        webElement11.sendKeys("Гончаров Илья Владимирович");
+        //добавляем Ответственный за осуществление надзора (руководитель группы)
+        //  Найти и кликнуть по полю ввода
+        WebElement inputField = new WebDriverWait(webDriver, Duration.ofSeconds(15))
+                .until(ExpectedConditions.elementToBeClickable(
+                        By.xpath("//h3[normalize-space()='Уполномоченные на проведение КНМ']" +
+                                "//following::label[contains(., 'Ответственный за осуществление надзора')]" +
+                                "//following-sibling::div//input[@aria-autocomplete='list']")
+                ));
+        inputField.click();
+        inputField.sendKeys("Гончаров Илья Владимирович");
+
+// выбираем исполнителя
+        WebElement option = new WebDriverWait(webDriver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(
+                        By.xpath("//h3[normalize-space()='Уполномоченные на проведение КНМ']" +
+                                "//following::label[contains(., 'Ответственный за осуществление надзора')]" +
+                                "//following-sibling::div//ng-dropdown-panel//span[normalize-space()='Гончаров Илья Владимирович']")
+                ));
+        option.click();
+
+        //Привлечение экспертизы - да
+        webDriver.findElement(By.name("yesExpertise")).click();
+        webDriver.findElement(By.name("isEngageSpecialist")).click();
+//заполняем Привлечь специалиста МГСН - ФИО специалиста
+        WebElement FIOspecialist = new WebDriverWait(webDriver , Duration.ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(@class, 'form-group')][.//label[contains(., 'ФИО специалиста')]]//input[@aria-autocomplete='list']")));
+        FIOspecialist.click();
+        FIOspecialist.sendKeys("Гончаров Илья Владимирович");
         webDriver.findElement(By.xpath(".//span[@class='ng-option-label ng-star-inserted' and text()='Гончаров Илья Владимирович']")).click();
 
+        //заполняем Дата начала КНМ и Время начала КНМ
+        WebElement dateStartKNM = webDriver.findElement(By.xpath("//label[contains(.,'Дата начала КНМ')]" +
+                "/following-sibling::div//input[@placeholder='__.__.____' and @class='form-control']"));
+        dateStartKNM.click();
+        dateStartKNM.sendKeys("22102025");
+        WebElement timeStartKNM = webDriver.findElement(By.xpath("//label[contains(.,'Дата начала КНМ')]" +
+                "/following-sibling::div//input[@placeholder='--:--' and @class='form-control m-l-xl text-center']"));
+        timeStartKNM.click();
+        timeStartKNM.sendKeys(Keys.ENTER);
+
+        //заполняем Дата окончания КНМ и Время окончания КНМ
+        WebElement dateEndKNM = webDriver.findElement(By.xpath("//label[contains(.,'Дата окончания КНМ')]" +
+                "/following-sibling::div//input[@placeholder='__.__.____' and @class='form-control']"));
+        dateEndKNM.click();
+        dateEndKNM.sendKeys("25102025");
+        WebElement timeEndKNM = webDriver.findElement(By.xpath("//label[contains(.,'Дата окончания КНМ')]" +
+                "/following-sibling::div//input[@placeholder='--:--' and @class='form-control m-l-xl text-center']"));
+        timeEndKNM.click();
+        timeEndKNM.sendKeys(Keys.ENTER);
+        // заполнеяем Срок проведения КНМ (раб. дней)
+       WebElement deadline = webDriver.findElement(By.xpath(".//input[@class='form-control ng-untouched ng-pristine ng-valid' and @placeholder='ДН']"));
+        deadline.click();
+        deadline.sendKeys("1");
+        // заполнеяем Срок непосредственного взаимодействия (часов, минут)
+        WebElement control = webDriver.findElement(By.xpath(".//input[@class='form-control ng-untouched ng-pristine ng-valid' and @placeholder='00:00']"));
+        control.click();
+        control.sendKeys("1530");
+//заполняем Согласовывает
+        WebElement appruve = webDriver.findElement(By.xpath("//label[contains(., 'Согласовывает')]" + "/following-sibling::div//input[@aria-autocomplete='list']"));
+        appruve.click();
+        appruve.sendKeys("Гончаров Илья Владимирович");
+        webDriver.findElement(By.xpath(".//span[@class='ng-option-label ng-star-inserted' and text()='Гончаров Илья Владимирович']")).click();
+
+        //заполняем Утверждает
+        WebElement appruve1 = webDriver.findElement(By.xpath("//label[contains(., 'Утверждает')]" + "/following-sibling::div//input[@aria-autocomplete='list']"));
+        appruve1.click();
+        appruve1.sendKeys("Гончаров Илья Владимирович");
+        webDriver.findElement(By.xpath(".//span[@class='ng-option-label ng-star-inserted' and text()='Гончаров Илья Владимирович']")).click();
+
+        // завершаем
+        webDriver.findElement(By.xpath(".//button[@class='btn btn-primary m-r-sm' and contains(text(),'На согласование')]")).click();
+
+    }
+    @AfterEach
+    public  void out() {
+        webDriver.quit();
     }
 }
