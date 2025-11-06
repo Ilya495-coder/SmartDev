@@ -8,8 +8,9 @@ import java.time.Duration;
 public class Autorized {
     private WebDriver webDriver;
 
-    public Autorized(WebDriver webDriver) {
+    public Autorized(WebDriver webDriver, String url) {
         this.webDriver = webDriver;
+        webDriver.get(url);
     }
     //авторизация
     By clickAutorized = By.xpath(".//a[contains(@class,'login-page__login title_login ')]");

@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SmartDev {
     private WebDriver webDriver;
+    private static final String BASE_URL = "https://smartid.reinform.ru/iam/auth/realms/smart/protocol/openid-connect/auth?client_id=smart-app&redirect_uri=https%3A%2F%2Fsmart-dev.reinform-int.ru%2Foauth%2Fcallback&response_type=code&scope=openid+email+profile&state=554ddeb1-766c-48ce-b076-f3b37cdb7e2b";
 
     @BeforeEach
     public void getDriver() {
@@ -18,9 +19,8 @@ public class SmartDev {
     @Order(1)
     @Test
     public void printStartINSPECTIONDECISION() throws InterruptedException {
-        webDriver.get("https://smartid.reinform.ru/iam/auth/realms/smart/protocol/openid-connect/auth?client_id=smart-app&redirect_uri=https%3A%2F%2Fsmart-dev.reinform-int.ru%2Foauth%2Fcallback&response_type=code&scope=openid+email+profile&state=554ddeb1-766c-48ce-b076-f3b37cdb7e2b");
         //авторизация
-        Autorized autorized = new Autorized(webDriver);
+        Autorized autorized = new Autorized(webDriver,BASE_URL);
         autorized.autorize("ilya","Ghbdtn123");
         // заходим в возможности и ищем задачу
         SearchTask searchTask = new SearchTask(webDriver);
@@ -53,9 +53,8 @@ public class SmartDev {
     @Order(2)
     @Test
     public  void printApproveKnmDecProjectSpec1() throws InterruptedException {
-        webDriver.get("https://smartid.reinform.ru/iam/auth/realms/smart/protocol/openid-connect/auth?client_id=smart-app&redirect_uri=https%3A%2F%2Fsmart-dev.reinform-int.ru%2Foauth%2Fcallback&response_type=code&scope=openid+email+profile&state=554ddeb1-766c-48ce-b076-f3b37cdb7e2b");
         //авторизация
-        Autorized autorized = new Autorized(webDriver);
+        Autorized autorized = new Autorized(webDriver,BASE_URL);
         autorized.autorize("martiushev_da","VsKexibt21");
         //заходим в витрину задач
         SearchTask searchTask = new SearchTask(webDriver);
@@ -74,9 +73,8 @@ public class SmartDev {
     @Order(3)
     @Test
     public  void printApproveKnmDecProjectSpec2() throws InterruptedException {
-        webDriver.get("https://smartid.reinform.ru/iam/auth/realms/smart/protocol/openid-connect/auth?client_id=smart-app&redirect_uri=https%3A%2F%2Fsmart-dev.reinform-int.ru%2Foauth%2Fcallback&response_type=code&scope=openid+email+profile&state=554ddeb1-766c-48ce-b076-f3b37cdb7e2b");
         //авторизация
-        Autorized autorized = new Autorized(webDriver);
+        Autorized autorized = new Autorized(webDriver,BASE_URL);
         autorized.autorize("ilya","Ghbdtn123");
         //заходим в витрину задач
         SearchTask searchTask = new SearchTask(webDriver);
@@ -94,9 +92,8 @@ public class SmartDev {
     @Order(4)
     @Test
     public  void printApproveKnmDecProjectSpec3() throws InterruptedException {
-      webDriver.get("https://smartid.reinform.ru/iam/auth/realms/smart/protocol/openid-connect/auth?client_id=smart-app&redirect_uri=https%3A%2F%2Fsmart-dev.reinform-int.ru%2Foauth%2Fcallback&response_type=code&scope=openid+email+profile&state=554ddeb1-766c-48ce-b076-f3b37cdb7e2b");
     //авторизация
-    Autorized autorized = new Autorized(webDriver);
+    Autorized autorized = new Autorized(webDriver,BASE_URL);
         autorized.autorize("tupitsyna_ks","Ktupitsyna123");
         //заходим в витрину задач
     SearchTask searchTask = new SearchTask(webDriver);
@@ -115,9 +112,8 @@ public class SmartDev {
     @Order(5)
     @Test
     public  void printApproveKnmDecProjectSpec4() throws InterruptedException {
-        webDriver.get("https://smartid.reinform.ru/iam/auth/realms/smart/protocol/openid-connect/auth?client_id=smart-app&redirect_uri=https%3A%2F%2Fsmart-dev.reinform-int.ru%2Foauth%2Fcallback&response_type=code&scope=openid+email+profile&state=554ddeb1-766c-48ce-b076-f3b37cdb7e2b");
     //авторизация
-    Autorized autorized = new Autorized(webDriver);
+    Autorized autorized = new Autorized(webDriver,BASE_URL);
         autorized.autorize("ivanov_ii","VsKexibt21");
         //заходим в витрину задач
     SearchTask searchTask = new SearchTask(webDriver);
@@ -136,9 +132,8 @@ public class SmartDev {
     @Order(6)
     @Test
     public void printApproveKnmDecProjectUn() throws InterruptedException {
-        webDriver.get("https://smartid.reinform.ru/iam/auth/realms/smart/protocol/openid-connect/auth?client_id=smart-app&redirect_uri=https%3A%2F%2Fsmart-dev.reinform-int.ru%2Foauth%2Fcallback&response_type=code&scope=openid+email+profile&state=554ddeb1-766c-48ce-b076-f3b37cdb7e2b");
         //авторизация
-        Autorized autorized = new Autorized(webDriver);
+        Autorized autorized = new Autorized(webDriver,BASE_URL);
         autorized.autorize("ilya","Ghbdtn123");
         //заходим в витрину задач
         SearchTask searchTask = new SearchTask(webDriver);
@@ -156,9 +151,8 @@ public class SmartDev {
     @Order(7)
     @Test
     public void printApproveKnmDecProjectSign() throws InterruptedException {
-        webDriver.get("https://smartid.reinform.ru/iam/auth/realms/smart/protocol/openid-connect/auth?client_id=smart-app&redirect_uri=https%3A%2F%2Fsmart-dev.reinform-int.ru%2Foauth%2Fcallback&response_type=code&scope=openid+email+profile&state=554ddeb1-766c-48ce-b076-f3b37cdb7e2b");
         //авторизация
-        Autorized autorized = new Autorized(webDriver);
+        Autorized autorized = new Autorized(webDriver,BASE_URL);
         autorized.autorize("ilya","Ghbdtn123");
         // заходим в витрину задач
         SearchTask searchTask = new SearchTask(webDriver);
@@ -176,9 +170,8 @@ public class SmartDev {
     @Order(8)
     @Test
     public void printFlex_changeKNMInfoToErknmManually() throws InterruptedException {
-        webDriver.get("https://smartid.reinform.ru/iam/auth/realms/smart/protocol/openid-connect/auth?client_id=smart-app&redirect_uri=https%3A%2F%2Fsmart-dev.reinform-int.ru%2Foauth%2Fcallback&response_type=code&scope=openid+email+profile&state=554ddeb1-766c-48ce-b076-f3b37cdb7e2b");
         //авторизация
-        Autorized autorized = new Autorized(webDriver);
+        Autorized autorized = new Autorized(webDriver,BASE_URL);
         autorized.autorize("ilya","Ghbdtn123");
         //заходим в витрину задач
         SearchTask searchTask = new SearchTask(webDriver);
@@ -201,9 +194,8 @@ public class SmartDev {
     @Order(9)
     @Test
     public void printFlex_enterKnmPassportId() throws InterruptedException {
-        webDriver.get("https://smartid.reinform.ru/iam/auth/realms/smart/protocol/openid-connect/auth?client_id=smart-app&redirect_uri=https%3A%2F%2Fsmart-dev.reinform-int.ru%2Foauth%2Fcallback&response_type=code&scope=openid+email+profile&state=554ddeb1-766c-48ce-b076-f3b37cdb7e2b");
         //авторизация
-        Autorized autorized = new Autorized(webDriver);
+        Autorized autorized = new Autorized(webDriver,BASE_URL);
         autorized.autorize("ilya","Ghbdtn123");
         //заходим в витрину задач
         SearchTask searchTask = new SearchTask(webDriver);
@@ -222,9 +214,8 @@ public class SmartDev {
     @Order(10)
     @Test
     public void printSignKnmDecProject() throws InterruptedException, AWTException {
-        webDriver.get("https://smartid.reinform.ru/iam/auth/realms/smart/protocol/openid-connect/auth?client_id=smart-app&redirect_uri=https%3A%2F%2Fsmart-dev.reinform-int.ru%2Foauth%2Fcallback&response_type=code&scope=openid+email+profile&state=554ddeb1-766c-48ce-b076-f3b37cdb7e2b");
         //авторизация
-        Autorized autorized = new Autorized(webDriver);
+        Autorized autorized = new Autorized(webDriver,BASE_URL);
         autorized.autorize("ilya","Ghbdtn123");
         //заходим в витрину задач
         SearchTask searchTask = new SearchTask(webDriver);
